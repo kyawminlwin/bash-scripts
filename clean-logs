@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Clear all logs contents for mac os.
+
+LOGFILES=$(find /var/log -name "*.log")
+
+for LOGFILE in $LOGFILES
+
+do
+	sudo cat /dev/null > $LOGFILE
+done
+
+echo 'log files successfully cleaned.'
+exit 0
