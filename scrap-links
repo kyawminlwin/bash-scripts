@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Scrap all links from web page.
+echo Which webpage do you want to scrap?
+
+read TOSCRAP
+
+TMPDIR=resource
+RAWFILE=links.csv
+FILTEREDFILE=links_filtered.csv
+FINALFILE=links_final.csv
+
+mkdir -p $TMPDIR
+
+cd $TMPDIR
+
+wget -q -r -l5 -x 5 $TOSCRAP
+
+cd ..
+
+grep -r -Po -h '(?<=href=")[^"]*' $TMPDIR > $RAWFILE
+grep "^http" $RAWFILE > $FILTEREDFILE
+sort -u $FILTEREDFILE > $FINALFILE
+
+rm -rf $TMPDIR $RAWFILE $FILTEREDFILE
+
+exit 0
