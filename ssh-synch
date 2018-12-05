@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Synch over ssh.
+echo Please enter local backup path.
+read BACKUP_PATH
+
+echo Please enter ssh server.
+read SSH_SERVER
+
+echo Which files do you want to synch?
+read DESTINATION_PATH
+
+rsync -zaP --rsync-path="sudo rsync" $SSH_SERVER:$DESTINATION_PATH $BACKUP_PATH
+
+exit 0
